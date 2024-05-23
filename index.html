@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Georgia, 'Times New Roman', Times, serif, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        header {
+            background: #fff;
+            color: #000;
+            padding: 20px 0;
+            text-align: left;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        header h1 {
+            margin: 25px;
+        }
+        nav {
+            text-align: center;
+            margin-top: 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        nav button {
+            background: #ffffff;
+            color: #ff69b4;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s, transform 0.3s;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            vertical-align: middle;
+        }
+        nav button i {
+            margin-right: 5px;
+        }
+        nav button:hover {
+            background: #ff1493;
+            color: #ffffff;
+            transform: scale(1.1);
+        }
+
+        .about {
+            display: inline-block;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 90px;
+            position: relative;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: left;
+            font-family: Georgia, serif;
+            width: 100%;
+            padding: 60px 90px;
+            box-sizing: border-box;
+            position: relative;
+            background: linear-gradient(to right, #efc7d4, #e8739a);
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile img {
+            max-width: 200px;
+            max-height: 200px;
+            width: auto;
+            height: auto;
+            object-fit: cover;
+            border-radius: 80%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .profile img:hover {
+            transform: scale(1.1);
+        }
+
+        .profile div {
+            flex: 1;
+            margin-left: 20px;
+        }
+        .profile h1 {
+            margin: 0;
+            font-size: 36px;
+            color: #333;
+        }
+        .profile p {
+            margin: 10px 0;
+        }
+
+
+        .social-media {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            right: 20px;
+            transition: opacity 0.3s ease-in-out;
+            opacity: 0;
+        }
+
+        .profile:hover .social-media {
+            opacity: 1;
+        }
+
+        .social-media a {
+            color: #333;
+            font-size: 24px;
+            margin: 5px 0;
+            transition: color 0.3s, transform 0.3s;
+        }
+        .social-media a:hover {
+            color: #e9e9e9;
+            transform: translateX(10px);
+        }
+        
+        section {
+            display: none;
+            padding: 20px;
+            margin-top: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        .active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            overflow: hidden;
+            padding: 0 20px;
+        }
+        footer {
+            background: #fff;
+            color: #000;
+            text-align: right;
+            width: 100%;
+            bottom: 0;
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        footer h1 {
+            margin: 15px;
+        }
+
+        .card {
+            background: #f9f9f9;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        * {
+        box-sizing: border-box;
+        }
+
+        body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .header {
+        text-align: center;
+        padding: 32px;
+        transition: opacity 0.3s ease-in-out;
+        }
+
+        .row {
+        display: -ms-flexbox; /* IE10 */
+        display: flex;
+        -ms-flex-wrap: wrap; /* IE10 */
+        flex-wrap: wrap;
+        padding: 0 4px;
+        }
+
+        /* Create four equal columns that sits next to each other */
+        .column {
+        -ms-flex: 25%; /* IE10 */
+        flex: 25%;
+        max-width: 25%;
+        padding: 0 4px;
+        }
+
+        .column img {
+        margin-top: 8px;
+        vertical-align: middle;
+        width: 100%;
+        }
+
+        /* Responsive layout - makes a two column-layout instead of four columns */
+        @media screen and (max-width: 800px) {
+        .column {
+            -ms-flex: 50%;
+            flex: 50%;
+            max-width: 50%;
+        }
+        }
+
+        /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+        @media screen and (max-width: 600px) {
+        .column {
+            -ms-flex: 100%;
+            flex: 100%;
+            max-width: 100%;
+        }
+        }
+
+        /* Efek Hover untuk Gambar */
+        .column img, .profile img {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .column img:hover, .profile img:hover {
+            transform: scale(1.4);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* CSS untuk Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function showSection(sectionId) {
+            var sections = document.querySelectorAll('section');
+            sections.forEach(function(section) {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        // Get the elements with class="column"
+        var elements = document.getElementsByClassName("column");
+
+        // Declare a loop variable
+        var i;
+
+        // Full-width images
+        function one() {
+            for (i = 0; i < elements.length; i++) {
+            elements[i].style.msFlex = "100%";  // IE10
+            elements[i].style.flex = "100%";
+        }
+        }
+
+        // Two images side by side
+        function two() {
+        for (i = 0; i < elements.length; i++) {
+            elements[i].style.msFlex = "50%";  // IE10
+            elements[i].style.flex = "50%";
+        }
+        }
+
+        // Four images side by side
+        function four() {
+        for (i = 0; i < elements.length; i++) {
+            elements[i].style.msFlex = "25%";  // IE10
+            elements[i].style.flex = "25%";
+        }
+    }
+
+        // Add active class to the current button (highlight it)
+        var header = document.getElementById("myHeader");
+        for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener("click", function() {
+            var current = document.getElementsByClassName("active");
+            current[0].className = current[0].className.replace(" active", "");
+            this.className += " active";
+        });
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+        const images = document.querySelectorAll('.column img, .profile img');
+        const modal = document.getElementById('imgModal');
+        const modalImg = document.getElementById('modalImg');
+        const closeModal = document.getElementsByClassName('close')[0];
+
+        images.forEach(image => {
+            image.addEventListener('click', () => {
+                modal.style.display = "block";
+                modalImg.src = image.src;
+            });
+        });
+
+        closeModal.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        modal.onclick = function() {
+            modal.style.display = "none";
+        }
+    });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>My Portfolio</h1>
+        <nav>
+            <button onclick="showSection('home')"><i class='fas fa-home'></i> Home</button>
+            <button onclick="showSection('about')"><i class='fas fa-user'></i> About</button>
+            <button onclick="showSection('portfolio')"><i class='fas fa-briefcase'></i> Portfolio</button>
+            <button onclick="showSection('contact')"><i class='fas fa-phone-alt'></i> Contact</button>
+        </nav>
+    </header>
+
+    <div class="container">
+        <section id="home" class="active">
+            <div class="card">
+                <div class="profile">
+                    <img src="img/foto.png" alt="Foto Diri">
+                    <div>
+                        <h1>I'm Naomi</h1>
+                        <p>Interest in the world of E-marketing and UI/UX Design</p>
+                    </div>
+                    <div class="social-media">
+                        <a href="https://www.linkedin.com/in/namikes" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.instagram.com/namikeshi_/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/6281328419569" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="card about">
+                <h2>Naomi Keisha Ananda</h2>
+                <p>Naomi is currently in her final year studying Information Systems with a GPA of 3.67. 
+                    Have an interest in activities that involve teamwork from exchanging ideas to implementing an activity. 
+                    Passionate about learning new things from people to the environment. Naomi has high responsibility for any 
+                    task given, is able to manage her time well, and has high tolerance for others. Can contribute well in the 
+                    environment and outside campus. There are many things that Naomi wants to develop and learn so that she can 
+                    have an impact on the community around her.</p>
+            </div>
+                <div class="card">
+                    <div class="row"> 
+                    <div class="column">
+                    <img src="img/Asisten-Dosen.jpg" style="width:100%">
+                    <img src="img/HIMSI (1).jpg" style="width:100%">
+                    <img src="img/HIMSI (8).jpg" style="width:100%">
+                    <img src="img/Inisiasi (2).jpg" style="width:100%">
+                    <img src="img/Inisiasi (6).jpg" style="width:100%">
+                    <img src="img/Inisiasi (10).jpg" style="width:100%">
+                    <img src="img/Inisiasi (15).jpg" style="width:100%">
+
+                    </div>
+                    <div class="column">
+                    <img src="img/HIMSI (2).jpg" style="width:100%">
+                    <img src="img/HIMSI (3).jpg" style="width:100%">
+                    <img src="img/HIMSI (9).jpg" style="width:100%">
+                    <img src="img/Inisiasi (3).jpg" style="width:100%">
+                    <img src="img/Inisiasi (7).jpg" style="width:100%">
+                    <img src="img/Inisiasi (11).jpg" style="width:100%">
+                    <img src="img/Inisiasi (16).jpg" style="width:100%">
+                    <img src="img/Inisiasi (17).jpg" style="width:100%">
+                    </div>  
+                    <div class="column">
+                    <img src="img/HIMSI (4).jpg" style="width:100%">
+                    <img src="img/HIMSI (5).jpg" style="width:100%">
+                    <img src="img/HIMSI (1).jpg" style="width:100%">
+                    <img src="img/Inisiasi (18).jpg" style="width:100%">
+                    <img src="img/Inisiasi (12).jpg" style="width:100%">
+                    <img src="img/Inisiasi (14).jpg" style="width:100%">
+                    </div>
+                    <div class="column">
+                    <img src="img/HIMSI (6).jpg" style="width:100%">
+                    <img src="img/HIMSI (7).jpg" style="width:100%">
+                    <img src="img/Inisiasi (1).jpg" style="width:100%">
+                    <img src="img/Inisiasi (5).jpg" style="width:100%">
+                    <img src="img/Inisiasi (9).jpg" style="width:100%">
+                    <img src="img/Inisiasi (8).jpg" style="width:100%">
+                    <img src="img/Inisiasi (13).jpg" style="width:100%">
+                    <img src="img/pelatihan.jpg" style="width:100%">
+                    <img src="img/ManaTahan (2).jpg" style="width:100%">
+                    <img src="img/ManaTahan (1).jpg" style="width:100%">
+                    <img src="img/Inisiasi (4).jpg" style="width:100%">
+                    </div>
+                </div>
+        </section>
+
+        <section id="portfolio">
+            <div class="card">
+                <div class="header" id="myHeader">
+                    <h1>Design</h1>
+                    <p>Some designs were created using Adobe Photoshop, Corel Draw, and Canva.</p>
+                </div>
+                    
+                <!-- Photo Grid -->
+                <div class="row"> 
+                    <div class="column">
+                    <img src="img/1.png" style="width:100%">
+                    <img src="img/Cover Guide Book HIMSI&SI Celebration.png" style="width:100%">
+                    <img src="img/COREL DRAW.png" style="width:100%">
+                    </div>
+                    <div class="column">
+                    <img src="img/2.png" style="width:100%">
+                    <img src="img/Adobe Photoshop (2).png" style="width:100%">
+                    <img src="img/Infografik.png" style="width:100%">
+                    </div>  
+                    <div class="column">
+                    <img src="img/Adobe Photoshop (4).png" style="width:100%">
+                    <img src="img/Poster FTI.jpg" style="width:100%">
+                    <img src="img/COVER.jpg" style="width:100%">
+                    </div>
+                    <div class="column">
+                    <img src="img/Adobe Photoshop (3).png" style="width:100%">
+                    <img src="img/POSTER.jpg" style="width:100%">
+                    <img src="img/Filter IG KKN.png" style="width:100%">
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+               <!-- Header -->
+                <div class="header" id="myHeader">
+                    <h1>Prototype SIPETSAGA</h1>
+                    <p>Course project in making a prototype for a petshop business.</p>
+                </div>
+                    
+                <!-- Photo Grid -->
+                <div class="row"> 
+                    <div class="column">
+                    <img src="img/PET-LOGIN.png" style="width:100%">
+                    <img src="img/PET-Detail Produk.png" style="width:100%">
+                    <img src="img/PET-Ubah Pengguna.png" style="width:100%">
+                    </div>
+                    <div class="column">
+                    <img src="img/PET-Beranda.png" style="width:100%">
+                    <img src="img/PET-Display Barang.png" style="width:100%">
+                    <img src="img/PET-Transaksi (Produk).png" style="width:100%">
+                    </div>  
+                    <div class="column">
+                    <img src="img/PET-Hapus Barang.png" style="width:100%">
+                    <img src="img/PET-Input Pengguna.png" style="width:100%">
+                    <img src="img/PET-Laporan Mingguan.png" style="width:100%">
+                    </div>
+                    <div class="column">
+                    <img src="img/PET-Hapus Pengguna.png" style="width:100%">
+                    <img src="img/PET-Ubah Barang.png" style="width:100%">
+                    <img src="img/PET-Laporan Bulanan.png" style="width:100%">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <!-- Header -->
+                 <div class="header" id="myHeader">
+                     <h1>Prototype Eat Me</h1>
+                     <p>Course project in making a prototype for a dessert business.</p>
+                 </div>
+                     
+                 <!-- Photo Grid -->
+                 <div class="row"> 
+                     <div class="column">
+                     <img src="img/Prototype-Eat-Me(1).jpg" style="width:100%">
+                     <img src="img/Prototype-Eat-Me(8).jpg" style="width:100%">
+                     </div>
+                     <div class="column">
+                     <img src="img/Prototype-Eat-Me(3).jpg" style="width:100%">
+                     <img src="img/Prototype-Eat-Me(9).jpg" style="width:100%">
+                     </div>  
+                     <div class="column">
+                     <img src="img/Prototype-Eat-Me(6).jpg" style="width:100%">
+                     <img src="img/Prototype-Eat-Me(10).jpg" style="width:100%">
+                     </div>
+                     <div class="column">
+                     <img src="img/Prototype-Eat-Me(7).jpg" style="width:100%">
+                     <img src="img/Prototype-Eat-Me(11).jpg" style="width:100%">
+                     </div>
+                 </div>
+             </div>
+
+        </section>
+
+        <section id="contact">
+            <div class="card">
+                <h2>Contact</h2>
+                <div class="profile">
+                    <div>
+                        <h3>Naomi Keisha Ananda</h3>
+                        <p>"Come join and connect with me in the digital world! </p>
+                        <p>Please find me on various social media platforms or send an email to collaborate."</p>
+                    </div>
+                    <div class="social-media">
+                        <a href="mailto:naomikeisha1@gmail.com"><i class="fas fa-envelope"></i> naomikeisha1@gmail.com</a>
+                        <a href="https://www.instagram.com/namikeshi_/" target="_blank"><i class="fab fa-instagram"></i> namikeshi_</a>
+                        <a href="https://wa.me/6281328419569" target="_blank"><i class="fab fa-whatsapp"></i> +6281328419569</a>
+                        <a href="https://www.linkedin.com/in/namikes" target="_blank"><i class="fab fa-linkedin"></i> Naomi Keisha Ananda</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p></p>
+    </footer>
+    <div id="imgModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImg">
+    </div>    
+</body>
+</html>
