@@ -281,14 +281,60 @@
             text-decoration: none;
             cursor: pointer;
         }
+
+        .portfolio-nav button {
+            background: #ffffff;
+            color: #333;
+            border: 1px solid #333;
+            padding: 10px 20px;
+            margin: 10px 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s, transform 0.3s;
+            border-radius: 20px;
+        }
+        .portfolio-nav button i {
+            margin-right: 5px;
+        }
+        .portfolio-nav button:hover {
+            background: #333;
+            color: #ffffff;
+            transform: scale(1.1);
+        }
     </style>
     <script>
         function showSection(sectionId) {
-            var sections = document.querySelectorAll('section');
+            var sections = document.querySelectorAll('section, .about, .profile');
             sections.forEach(function(section) {
                 section.classList.remove('active');
             });
             document.getElementById(sectionId).classList.add('active');
+        }
+
+        function scrollToCard(cardId) {
+            const card = document.getElementById(cardId);
+            if (card) {
+                card.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Modal functionality
+        var modal = document.getElementById("myModal");
+        var modalImg = document.getElementById("img01");
+        var captionText = document.getElementById("caption");
+
+        document.querySelectorAll(".column img").forEach(img => {
+            img.onclick = function(){
+                modal.style.display = "block";
+                modalImg.src = this.src;
+                captionText.innerHTML = this.alt;
+            }
+        });
+
+        var span = document.getElementsByClassName("close")[0];
+
+        span.onclick = function() { 
+            modal.style.display = "none";
         }
 
         // Get the elements with class="column"
@@ -372,7 +418,7 @@
                     <img src="img/foto.png" alt="Foto Diri">
                     <div>
                         <h1>I'm Naomi</h1>
-                        <p>Interest in the world of E-marketing and UI/UX Design</p>
+                        <p>Interest in the world of E-marketing and Design</p>
                     </div>
                     <div class="social-media">
                         <a href="https://www.linkedin.com/in/namikes" target="_blank"><i class="fab fa-linkedin"></i></a>
@@ -440,13 +486,18 @@
         </section>
 
         <section id="portfolio">
-            <div class="card">
-                <div class="header" id="myHeader">
-                    <h1>Design</h1>
-                    <p>Some designs were created using Adobe Photoshop, Corel Draw, and Canva.</p>
-                </div>
-                    
-                <!-- Photo Grid -->
+            <!-- Introductory section -->
+        <div class="portfolio-nav">
+            <button onclick="scrollToCard('card1')"><i class="fas fa-project-diagram"></i> Design</button>
+            <button onclick="scrollToCard('card2')"><i class="fas fa-code"></i> Prototype SIPETSAGA</button>
+            <button onclick="scrollToCard('card3')"><i class="fas fa-paint-brush"></i> Prototype Eat Me</button>
+        </div>
+
+        <div class="card" id="card1">
+            <h2>Design</h2>
+            <p>Some designs were created using Adobe Photoshop, Corel Draw, and Canva.</p>
+
+            <!-- Photo Grid -->
                 <div class="row"> 
                     <div class="column">
                     <img src="img/1.png" style="width:100%">
@@ -470,14 +521,11 @@
                     </div>
                 </div>
             </div>
-            <div class="card">
-               <!-- Header -->
-                <div class="header" id="myHeader">
-                    <h1>Prototype SIPETSAGA</h1>
-                    <p>Course project in making a prototype for a petshop business created using Figma.</p>
-                </div>
-                    
-                <!-- Photo Grid -->
+        </div>
+        <div class="card" id="card2">
+            <h2>Prototype SIPETSAGA</h2>
+            <p>Course project in making a prototype for a petshop business created using Figma.</p>
+             <!-- Photo Grid -->
                 <div class="row"> 
                     <div class="column">
                     <img src="img/PET-LOGIN.png" style="width:100%">
@@ -500,16 +548,11 @@
                     <img src="img/PET-Laporan Bulanan.png" style="width:100%">
                     </div>
                 </div>
-            </div>
-
-            <div class="card">
-                <!-- Header -->
-                 <div class="header" id="myHeader">
-                     <h1>Prototype Eat Me</h1>
-                     <p>Course project in making a prototype for a dessert business created using Canva.</p>
-                 </div>
-                     
-                 <!-- Photo Grid -->
+        </div>
+        <div class="card" id="card3">
+            <h2>Prototype Eat Me</h2>
+            <p>Course project in making a prototype for a dessert business created using Canva.</p>
+            <!-- Photo Grid -->
                  <div class="row"> 
                      <div class="column">
                      <img src="img/Prototype-Eat-Me(1).jpg" style="width:100%">
@@ -528,8 +571,7 @@
                      <img src="img/Prototype-Eat-Me(11).jpg" style="width:100%">
                      </div>
                  </div>
-             </div>
-
+        </div>
         </section>
 
         <section id="contact">
