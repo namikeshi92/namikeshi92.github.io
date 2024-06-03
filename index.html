@@ -133,6 +133,24 @@
             color: #e9e9e9;
             transform: translateX(10px);
         }
+
+        /* Tambahkan CSS untuk tautan media sosial di bagian "Contact" */
+        .contact-social-media a {
+        color: #ff69b4; /* Warna awal tautan */
+        font-size: 20px;
+        text-decoration: none;
+        margin: 10px 0;
+        transition: color 0.3s, transform 0.3s;
+        }
+    
+        .contact-social-media a:hover {
+        color: #ff1493; /* Warna tautan saat di-hover */
+        transform: scale(1.1);
+        }
+    
+        .contact-social-media i {
+        margin-right: 8px;
+        }
         
         section {
             display: none;
@@ -235,7 +253,7 @@
         }
 
         /* Efek Hover untuk Gambar */
-        .column img {
+        .column img, .profile img {
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
 
@@ -574,25 +592,24 @@
         </section>
 
         <section id="contact">
-            <div class="card">
-                <h2>Contact</h2>
-                <div class="profile">
-                    <div>
-                        <h3>Naomi Keisha Ananda</h3>
-                        <p>"Come join and connect with me in the digital world! </p>
-                        <p>Please find me on various social media platforms or send an email to collaborate."</p>
-                    </div>
-                    <div class="social-media">
-                        <a href="mailto:naomikeisha1@gmail.com"><i class="fas fa-envelope"></i> naomikeisha1@gmail.com</a>
-                        <a href="https://www.instagram.com/namikeshi_/" target="_blank"><i class="fab fa-instagram"></i> namikeshi_</a>
-                        <a href="https://wa.me/6281328419569" target="_blank"><i class="fab fa-whatsapp"></i> +6281328419569</a>
-                        <a href="https://www.linkedin.com/in/namikes" target="_blank"><i class="fab fa-linkedin"></i> Naomi Keisha Ananda</a>
-                    </div>
+        <div class="card">
+            <h2>Contact</h2>
+            <div class="profile">
+                <div>
+                    <h3>Naomi Keisha Ananda</h3>
+                    <p>"Come join and connect with me in the digital world!</p>
+                    <p>Please find me on various social media platforms or send an email to collaborate."</p>
+                </div>
+                <div class="contact-social-media">
+                    <a href="mailto:naomikeisha1@gmail.com"><i class="fas fa-envelope"></i> naomikeisha1@gmail.com</a>
+                    <a href="https://www.instagram.com/namikeshi_/" target="_blank"><i class="fab fa-instagram"></i> namikeshi_</a>
+                    <a href="https://wa.me/6281328419569" target="_blank"><i class="fab fa-whatsapp"></i> +6281328419569</a>
+                    <a href="https://www.linkedin.com/in/namikes" target="_blank"><i class="fab fa-linkedin"></i> Naomi Keisha Ananda</a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
     </div>
-
     <footer>
         <p></p>
     </footer>
