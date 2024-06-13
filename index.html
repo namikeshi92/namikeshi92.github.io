@@ -134,22 +134,27 @@
         }
 
         /* Tambahkan CSS untuk tautan media sosial di bagian "Contact" */
-        .contact-social-media a {
-            color: #ff69b4; /* Warna awal tautan */
+        .contact-social-media {
             display: flex;
             flex-direction: column;
-            position: absolute;
-            right: 20px;
-            transition: color 0.3s, transform 0.3s;
+            gap: 10px; /* Menambahkan jarak antara setiap elemen */
+            padding: 20px 0; /* Menambahkan padding agar tidak terlalu dekat dengan tepi */
+        }
+        
+        .contact-social-media a {
+            color: #333;
+            font-size: 18px;
+            text-decoration: none;
+            transition: color 0.3s, transform 0.3s; /* Menambahkan efek transisi */
         }
         
         .contact-social-media a:hover {
-            color: #ff1493; /* Warna tautan saat di-hover */
-            transform: scale(1.1);
+            color: #ff1493; /* Warna saat di-hover */
+            transform: translateX(10px); /* Menambahkan sedikit efek gerakan */
         }
         
         .contact-social-media i {
-            margin-right: 8px;
+            margin-right: 8px; /* Menambahkan jarak antara ikon dan teks */
         }
 
         section {
@@ -609,6 +614,7 @@
             </div>
         </div>
     </section>
+
     </div>
     <footer>
         <p></p>
