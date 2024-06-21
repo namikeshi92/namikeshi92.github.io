@@ -157,6 +157,19 @@
             margin-right: 8px; /* Menambahkan jarak antara ikon dan teks */
         }
 
+        .column video {
+            margin-top: 8px;
+            vertical-align: middle;
+            width: 100%;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .column video:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+
         section {
             display: none;
             padding: 20px;
@@ -197,6 +210,7 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s;
+            text-align: center;
         }
         .card:hover {
             transform: translateY(-10px);
@@ -218,25 +232,33 @@
         }
 
         .row {
-        display: -ms-flexbox; /* IE10 */
-        display: flex;
-        -ms-flex-wrap: wrap; /* IE10 */
-        flex-wrap: wrap;
-        padding: 0 4px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
         }
 
-        /* Create four equal columns that sits next to each other */
         .column {
-        -ms-flex: 25%; /* IE10 */
-        flex: 25%;
-        max-width: 25%;
-        padding: 0 4px;
+            flex: 1;
+            max-width: 45%;
         }
 
         .column img {
-        margin-top: 8px;
-        vertical-align: middle;
-        width: 100%;
+                margin-top: 8px;
+                vertical-align: middle;
+                width: 100%;
+                }.column img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            color: #df78b2;
+            background: #ffffff;
         }
 
         /* Responsive layout - makes a two column-layout instead of four columns */
@@ -513,7 +535,8 @@
             <button onclick="scrollToCard('card1')"><i class="fas fa-paint-brush"></i> Design</button>
             <button onclick="scrollToCard('card2')"><i class="fas fa-code"></i> Prototype SIPETSAGA</button>
             <button onclick="scrollToCard('card3')"><i class="fas fa-code"></i> Prototype Eat Me</button>
-            <button onclick="scrollToCard('card4')"><i class="fas fa-file-signature"></i> Content</button>
+            <button onclick="scrollToCard('card4')"><i class="fas fa-video"></i> Content</button>
+            <button onclick="scrollToCard('card5')"><i class="fas fa-diagnoses"></i> Social Media Admin</button>
         </div>
 
         <div class="card" id="card1">
@@ -593,6 +616,68 @@
                      <img src="img/Prototype-Eat-Me(11).jpg" style="width:100%">
                      </div>
                  </div>
+        </div>
+        <div class="card" id="card4">
+            <h2>Content</h2>
+            <p>Some video projects I've worked on & as a talent.</p>
+            <div class="row">
+                <div class="column">
+                    <video controls>
+                        <source src="img/PROMOSI_HIMPUNAN.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <video controls>
+                        <source src="img/PROMOSI_PRODI.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="column">
+                    <video controls>
+                        <source src="img/SOSIALISASI.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <video controls>
+                        <source src="img/WAWANCARA_WISUDA.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="column">
+                    <video controls>
+                        <source src="img/TIKTOK_SI.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <video controls>
+                        <source src="img/PMB_SI.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="column">
+                    <video controls>
+                        <source src="img/King&Queen N.E.D Cover.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+        </div>
+        </div>
+        <div class="card" id="card5">
+            <h2>Social Media Admin</h2>
+            <p>The Instagram social media display of the Field Study and Community Service (Kuliah Kerja Nyata/KKN) group which I control from creating logos, feeds, daily content.</p>
+            <div class="row"> 
+                <div class="column">
+                <img src="img/feed1.jpg" style="width:100%">
+                <img src="img/feed2.jpg" style="width:100%">
+                </div>
+                <div class="column">
+                <img src="img/feed3.jpg" style="width:100%">
+                <img src="img/feed4.jpg" style="width:100%">
+                </div>
+                </div>
+
+                <div class="button-container">
+                    <a href="https://www.instagram.com/bandung70_kkn85uajy" target="_blank">
+                        <button>Visit Instagram</button>
+                    </a>
+                </div>
         </div>
         </section>
 
