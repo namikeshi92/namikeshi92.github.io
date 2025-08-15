@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <style>
+        :root {
+            --pink: #ff69b4;
+            --pink-strong: #ff1493;
+            --text: #333;
+            --card: #f9f9f9;
+            --bg: #f0f0f0;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
         body {
             font-family: Georgia, 'Times New Roman', Times, serif, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f0f0f0;
-            color: #333;
+            background-color: var(--bg);
+            color: var(--text);
         }
         header {
             background: #fff;
             color: #000;
             padding: 20px 0;
             text-align: left;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow), 0 8px 16px rgba(0, 0, 0, 0.1);
             position: relative;
         }
         header h1 {
@@ -34,7 +42,7 @@
         }
         nav button {
             background: #ffffff;
-            color: #ff69b4;
+            color: var(--pink);
             border: none;
             padding: 10px 20px;
             margin: 0 5px;
@@ -46,25 +54,14 @@
             align-items: center;
             vertical-align: middle;
         }
-        nav button i {
-            margin-right: 5px;
-        }
+        nav button i { margin-right: 5px; }
         nav button:hover {
-            background: #ff1493;
+            background: var(--pink-strong);
             color: #ffffff;
             transform: scale(1.1);
         }
 
-        .about {
-            display: inline-block;
-            text-align: center;
-            align-items: center;
-            justify-content: center;
-            padding: 60px 90px;
-            position: relative;
-            box-sizing: border-box;
-            width: 100%;
-        }
+        .about { display: inline-block; text-align: center; align-items: center; justify-content: center; padding: 60px 90px; position: relative; box-sizing: border-box; width: 100%; }
 
         .profile {
             display: flex;
@@ -78,468 +75,236 @@
             position: relative;
             background: linear-gradient(to right, #efc7d4, #e8739a);
             border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow), 0 8px 16px rgba(0, 0, 0, 0.1);
         }
+        .profile img { max-width: 200px; max-height: 200px; width: auto; height: auto; object-fit: cover; border-radius: 80%; box-shadow: var(--shadow), 0 8px 16px rgba(0, 0, 0, 0.1); transition: opacity 0.3s ease-in-out; }
+        .profile img:hover { transform: scale(1.1); }
+        .profile div { flex: 1; margin-left: 20px; }
+        .profile h1 { margin: 0; font-size: 36px; color: #333; }
+        .profile p { margin: 10px 0; }
 
-        .profile img {
-            max-width: 200px;
-            max-height: 200px;
-            width: auto;
-            height: auto;
-            object-fit: cover;
-            border-radius: 80%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
-            transition: opacity 0.3s ease-in-out;
-        }
+        .social-media { display: flex; flex-direction: column; position: absolute; right: 20px; transition: opacity 0.3s ease-in-out; opacity: 0; }
+        .profile:hover .social-media { opacity: 1; }
+        .social-media a { color: #333; font-size: 24px; margin: 5px 0; transition: color 0.3s, transform 0.3s; }
+        .social-media a:hover { color: #e9e9e9; transform: translateX(10px); }
 
-        .profile img:hover {
-            transform: scale(1.1);
-        }
+        .contact-social-media { display: flex; flex-direction: column; position: absolute; right: 20px; }
+        .contact-social-media a { color: #333; font-size: 18px; text-decoration: none; transition: color 0.3s, transform 0.3s; }
+        .contact-social-media a:hover { color: var(--pink-strong); transform: translateX(10px); }
+        .contact-social-media i { margin-right: 8px; }
 
-        .profile div {
-            flex: 1;
-            margin-left: 20px;
-        }
-        .profile h1 {
-            margin: 0;
-            font-size: 36px;
-            color: #333;
-        }
-        .profile p {
-            margin: 10px 0;
-        }
+        .column video { margin-top: 8px; vertical-align: middle; width: 100%; transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; }
+        .column video:hover { transform: scale(1.1); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); }
 
-        .social-media {
-            display: flex;
-            flex-direction: column;
-            position: absolute;
-            right: 20px;
-            transition: opacity 0.3s ease-in-out;
-            opacity: 0;
-        }
+        section { display: none; padding: 20px; margin-top: 20px; opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s; }
+        .active { display: block; opacity: 1; transform: translateY(0); }
+        .container { max-width: 1200px; margin: auto; overflow: hidden; padding: 0 20px; }
+        footer { background: #fff; color: #000; text-align: right; width: 100%; bottom: 0; box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1); position: relative; }
+        footer h1 { margin: 15px; }
 
-        .profile:hover .social-media {
-            opacity: 1;
-        }
+        .card { background: var(--card); padding: 20px; margin-bottom: 20px; border-radius: 10px; box-shadow: var(--shadow); transition: transform 0.3s; text-align: center; }
+        .card:hover { transform: translateY(-10px); }
 
-        .social-media a {
-            color: #333;
-            font-size: 24px;
-            margin: 5px 0;
-            transition: color 0.3s, transform 0.3s;
-        }
-        .social-media a:hover {
-            color: #e9e9e9;
-            transform: translateX(10px);
-        }
+        * { box-sizing: border-box; }
+        .header { text-align: center; padding: 32px; transition: opacity 0.3s ease-in-out; }
+        .row { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+        .column { flex: 1; max-width: 45%; }
+        .column img { margin-top: 8px; vertical-align: middle; width: 100%; border-radius: 10px; }
 
-        /* Tambahkan CSS untuk tautan media sosial di bagian "Contact" */
-        .contact-social-media {
-            display: flex;
-            flex-direction: column;
-            position: absolute;
-            right: 20px;
-        }
-        
-        .contact-social-media a {
-            color: #333;
-            font-size: 18px;
-            text-decoration: none;
-            transition: color 0.3s, transform 0.3s; /* Menambahkan efek transisi */
-        }
-        
-        .contact-social-media a:hover {
-            color: #ff1493; /* Warna saat di-hover */
-            transform: translateX(10px); /* Menambahkan sedikit efek gerakan */
-        }
-        
-        .contact-social-media i {
-            margin-right: 8px; /* Menambahkan jarak antara ikon dan teks */
-        }
+        .button-container { display: flex; justify-content: center; margin-top: 20px; color: #df78b2; background: #ffffff; }
 
-        .column video {
-            margin-top: 8px;
-            vertical-align: middle;
-            width: 100%;
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
+        @media screen and (max-width: 800px) { .column { -ms-flex: 50%; flex: 50%; max-width: 50%; } }
+        @media screen and (max-width: 600px) { .column { -ms-flex: 100%; flex: 100%; max-width: 100%; } }
 
-        .column video:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
+        .column img, .profile img { transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; }
+        .column img:hover, .profile img:hover { transform: scale(1.4); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); }
 
+        .modal { display: none; position: fixed; z-index: 1000; padding-top: 60px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.9); }
+        .modal-content { margin: auto; display: block; width: 80%; max-width: 800px; }
+        .close { position: absolute; top: 15px; right: 35px; color: #fff; font-size: 40px; font-weight: bold; transition: 0.3s; }
+        .close:hover, .close:focus { color: #bbb; text-decoration: none; cursor: pointer; }
 
-        section {
-            display: none;
-            padding: 20px;
-            margin-top: 20px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s, transform 0.5s;
-        }
-        .active {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            overflow: hidden;
-            padding: 0 20px;
-        }
-        footer {
-            background: #fff;
-            color: #000;
-            text-align: right;
-            width: 100%;
-            bottom: 0;
-            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
+        .portfolio-nav button { background: #ffffff; color: #333; border: 1px solid #333; padding: 10px 20px; margin: 10px 5px; cursor: pointer; font-size: 16px; transition: background 0.3s, transform 0.3s; border-radius: 20px; }
+        .portfolio-nav button i { margin-right: 5px; }
+        .portfolio-nav button:hover { background: #333; color: #ffffff; transform: scale(1.1); }
 
-        footer h1 {
-            margin: 15px;
-        }
+        /* ===== TOOLS SECTION ===== */
+        .tools-controls { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 20px; }
+        .tools-controls input[type="text"] { padding: 10px 14px; border-radius: 14px; border: 1px solid #ccc; min-width: 240px; }
+        .chip { padding: 8px 14px; border-radius: 20px; border: 1px solid #333; background: #fff; cursor: pointer; transition: all .2s; }
+        .chip.active, .chip:hover { background: #333; color: #fff; }
 
-        .card {
-            background: #f9f9f9;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-            text-align: center;
-        }
-        .card:hover {
-            transform: translateY(-10px);
-        }
-
-        * {
-        box-sizing: border-box;
-        }
-
-        body {
-        margin: 0;
-        font-family: Arial, Helvetica, sans-serif;
-        }
-
-        .header {
-        text-align: center;
-        padding: 32px;
-        transition: opacity 0.3s ease-in-out;
-        }
-
-        .row {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .column {
-            flex: 1;
-            max-width: 45%;
-        }
-
-        .column img {
-                margin-top: 8px;
-                vertical-align: middle;
-                width: 100%;
-                }.column img {
-            width: 100%;
-            border-radius: 10px;
-        }
-
-        .button-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-            color: #df78b2;
-            background: #ffffff;
-        }
-
-        /* Responsive layout - makes a two column-layout instead of four columns */
-        @media screen and (max-width: 800px) {
-        .column {
-            -ms-flex: 50%;
-            flex: 50%;
-            max-width: 50%;
-        }
-        }
-
-        /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-        @media screen and (max-width: 600px) {
-        .column {
-            -ms-flex: 100%;
-            flex: 100%;
-            max-width: 100%;
-        }
-        }
-
-        /* Efek Hover untuk Gambar */
-        .column img, .profile img {
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-
-        .column img:hover, .profile img:hover {
-            transform: scale(1.4);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        /* CSS untuk Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            padding-top: 60px;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.9);
-        }
-
-        .modal-content {
-            margin: auto;
-            display: block;
-            width: 80%;
-            max-width: 800px;
-        }
-
-        .close {
-            position: absolute;
-            top: 15px;
-            right: 35px;
-            color: #fff;
-            font-size: 40px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: #bbb;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .portfolio-nav button {
-            background: #ffffff;
-            color: #333;
-            border: 1px solid #333;
-            padding: 10px 20px;
-            margin: 10px 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s, transform 0.3s;
-            border-radius: 20px;
-        }
-        .portfolio-nav button i {
-            margin-right: 5px;
-        }
-        .portfolio-nav button:hover {
-            background: #333;
-            color: #ffffff;
-            transform: scale(1.1);
-        }
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+        .tool-card { background: #fff; border-radius: 14px; padding: 16px; text-align: left; box-shadow: var(--shadow); position: relative; overflow: hidden; transition: transform .2s, box-shadow .2s; cursor: pointer; }
+        .tool-card:hover { transform: translateY(-6px); box-shadow: 0 10px 22px rgba(0,0,0,.12); }
+        .tool-card .logo { width: 48px; height: 48px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+        .tool-card .logo img { width: 100%; height: 100%; object-fit: contain; }
+        .tool-card h4 { margin: 4px 0 6px; }
+        .badges { display: flex; gap: 6px; flex-wrap: wrap; }
+        .badge { font-size: 12px; padding: 4px 8px; background: #f1f1f1; border-radius: 999px; border: 1px solid #e3e3e3; }
+        .pill { position: absolute; top: 10px; right: 10px; font-size: 11px; padding: 4px 8px; border-radius: 999px; background: #ffe7f3; color: #b30068; border: 1px solid #ffd1ea; }
+        .tool-footer { margin-top: 10px; display: flex; align-items: center; justify-content: space-between; }
+        .learn-btn { border: none; background: var(--pink); color: #fff; border-radius: 999px; padding: 6px 12px; cursor: pointer; transition: transform .2s; }
+        .learn-btn:hover { transform: translateY(-2px); }
     </style>
     <script>
         function showSection(sectionId) {
             var sections = document.querySelectorAll('section, .about, .profile');
-            sections.forEach(function(section) {
-                section.classList.remove('active');
-            });
+            sections.forEach(function (section) { section.classList.remove('active'); });
             document.getElementById(sectionId).classList.add('active');
+            // Scroll to top of container when switching
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-
         function scrollToCard(cardId) {
             const card = document.getElementById(cardId);
-            if (card) {
-                card.scrollIntoView({ behavior: 'smooth' });
+            if (card) { card.scrollIntoView({ behavior: 'smooth' }); }
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            // Modal for images
+            const images = document.querySelectorAll('.column img, .profile img');
+            const modal = document.getElementById('imgModal');
+            const modalImg = document.getElementById('modalImg');
+            const closeModal = document.getElementsByClassName('close')[0];
+            images.forEach(image => { image.addEventListener('click', () => { modal.style.display = 'block'; modalImg.src = image.src; }); });
+            closeModal.onclick = () => modal.style.display = 'none';
+            modal.onclick = () => modal.style.display = 'none';
+
+            // ===== Tools interactions =====
+            const chips = document.querySelectorAll('.chip');
+            const search = document.getElementById('tool-search');
+            const cards = document.querySelectorAll('.tool-card');
+
+            let activeFilter = 'All';
+            chips.forEach(chip => {
+                chip.addEventListener('click', () => {
+                    chips.forEach(c => c.classList.remove('active'));
+                    chip.classList.add('active');
+                    activeFilter = chip.dataset.filter;
+                    filterTools();
+                });
+            });
+            search.addEventListener('input', filterTools);
+
+            function filterTools() {
+                const q = search.value.toLowerCase();
+                cards.forEach(card => {
+                    const tags = card.dataset.tags.split(',');
+                    const text = card.innerText.toLowerCase();
+                    const matchesFilter = (activeFilter === 'All') || tags.includes(activeFilter);
+                    const matchesSearch = !q || text.includes(q);
+                    card.style.display = (matchesFilter && matchesSearch) ? 'block' : 'none';
+                });
             }
-        }
-
-        // Modal functionality
-        var modal = document.getElementById("myModal");
-        var modalImg = document.getElementById("img01");
-        var captionText = document.getElementById("caption");
-
-        document.querySelectorAll(".column img").forEach(img => {
-            img.onclick = function(){
-                modal.style.display = "block";
-                modalImg.src = this.src;
-                captionText.innerHTML = this.alt;
-            }
-        });
-
-        var span = document.getElementsByClassName("close")[0];
-
-        span.onclick = function() { 
-            modal.style.display = "none";
-        }
-
-        // Get the elements with class="column"
-        var elements = document.getElementsByClassName("column");
-
-        // Declare a loop variable
-        var i;
-
-        // Full-width images
-        function one() {
-            for (i = 0; i < elements.length; i++) {
-            elements[i].style.msFlex = "100%";  // IE10
-            elements[i].style.flex = "100%";
-        }
-        }
-
-        // Two images side by side
-        function two() {
-        for (i = 0; i < elements.length; i++) {
-            elements[i].style.msFlex = "50%";  // IE10
-            elements[i].style.flex = "50%";
-        }
-        }
-
-        // Four images side by side
-        function four() {
-        for (i = 0; i < elements.length; i++) {
-            elements[i].style.msFlex = "25%";  // IE10
-            elements[i].style.flex = "25%";
-        }
-    }
-
-        // Add active class to the current button (highlight it)
-        var header = document.getElementById("myHeader");
-        for (var i = 0; i < btns.length; i++) {
-        btns[i].addEventListener("click", function() {
-            var current = document.getElementsByClassName("active");
-            current[0].className = current[0].className.replace(" active", "");
-            this.className += " active";
-        });
-        }
-
-        document.addEventListener('DOMContentLoaded', (event) => {
-        const images = document.querySelectorAll('.column img, .profile img');
-        const modal = document.getElementById('imgModal');
-        const modalImg = document.getElementById('modalImg');
-        const closeModal = document.getElementsByClassName('close')[0];
-
-        images.forEach(image => {
-            image.addEventListener('click', () => {
-                modal.style.display = "block";
-                modalImg.src = image.src;
+            // open external link from button
+            document.querySelectorAll('.learn-btn').forEach(btn => {
+                btn.addEventListener('click', e => {
+                    e.stopPropagation();
+                    const url = btn.dataset.url;
+                    if (url) window.open(url, '_blank');
+                });
+            });
+            // card click toggles details
+            document.querySelectorAll('.tool-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const more = card.querySelector('.more');
+                    more.style.display = more.style.display === 'block' ? 'none' : 'block';
+                });
             });
         });
-
-        closeModal.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        modal.onclick = function() {
-            modal.style.display = "none";
-        }
-    });
     </script>
 </head>
 <body>
-    <header>
-        <h1>My Portfolio</h1>
-        <nav>
-            <button onclick="showSection('home')"><i class='fas fa-home'></i> Home</button>
-            <button onclick="showSection('about')"><i class='fas fa-user'></i> About</button>
-            <button onclick="showSection('portfolio')"><i class='fas fa-briefcase'></i> Portfolio</button>
-            <button onclick="showSection('contact')"><i class='fas fa-phone-alt'></i> Contact</button>
-        </nav>
-    </header>
+<header>
+    <h1>My Portfolio</h1>
+    <nav>
+        <button onclick="showSection('home')"><i class='fas fa-home'></i> Home</button>
+        <button onclick="showSection('about')"><i class='fas fa-user'></i> About</button>
+        <button onclick="showSection('portfolio')"><i class='fas fa-briefcase'></i> Portfolio</button>
+        <button onclick="showSection('tools')"><i class='fas fa-tools'></i> Tools</button>
+        <button onclick="showSection('contact')"><i class='fas fa-phone-alt'></i> Contact</button>
+    </nav>
+</header>
 
-    <div class="container">
-        <section id="home" class="active">
-            <div class="card">
-                <div class="profile">
-                    <img src="img/foto.png" alt="Foto Diri">
-                    <div>
-                        <h1>I'm Naomi</h1>
-                        <p>Interest in the world of E-marketing and Design</p>
-                    </div>
-                    <div class="social-media">
-                        <a href="https://www.linkedin.com/in/namikes" target="_blank"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://www.instagram.com/namikeshi_/" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://wa.me/6281328419569" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    </div>
+<div class="container">
+    <!-- ===== HOME ===== -->
+    <section id="home" class="active">
+        <div class="card">
+            <div class="profile">
+                <img src="img/foto.png" alt="Foto Diri" />
+                <div>
+                    <h1>I'm Naomi</h1>
+                    <p>Interest in the world of E-marketing and Design</p>
+                </div>
+                <div class="social-media">
+                    <a href="https://www.linkedin.com/in/namikes" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/namikeshi_/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/6281328419569" target="_blank"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="about">
-            <div class="card about">
-                <h2>Naomi Keisha Ananda</h2>
-                <p>Naomi is a graduate of the Bachelor of Information Systems study program this year. 
-                    Have an interest in activities that involve teamwork from exchanging ideas to implementing an activity. 
-                    Passionate about learning new things from people to the environment. Naomi has high responsibility for any 
-                    task given, is able to manage her time well, and has high tolerance for others. Can contribute well in the 
-                    environment and outside campus. There are many things that Naomi wants to develop and learn so that she can 
-                    have an impact on the community around her.</p>
-            </div>
-            <div class="card about2">
-                <h3>Experience</h3>
-                <p>Naomi is an active student who participates in campus activities. Naomi once participated in an internship program at an IT company called Horus Technology. 
-                    Her position was a Business Systems Analyst, focusing on UI/UX design for websites, self-service, or applications.
-                </p>
-            </div>
-                <div class="card">
-                    <div class="row"> 
-                    <div class="column">
-                    <img src="img/Asisten-Dosen.jpg" style="width:100%">
-                    <img src="img/HIMSI (1).jpg" style="width:100%">
-                    <img src="img/HIMSI (8).jpg" style="width:100%">
-                    <img src="img/Inisiasi (2).jpg" style="width:100%">
-                    <img src="img/Inisiasi (6).jpg" style="width:100%">
-                    <img src="img/Inisiasi (10).jpg" style="width:100%">
-                    <img src="img/Inisiasi (15).jpg" style="width:100%">
-                    <img src="img/Intern (1).jpg" style="width:100%">
-                    </div>
-                    <div class="column">
-                    <img src="img/HIMSI (2).jpg" style="width:100%">
-                    <img src="img/HIMSI (3).jpg" style="width:100%">
-                    <img src="img/HIMSI (9).jpg" style="width:100%">
-                    <img src="img/Inisiasi (3).jpg" style="width:100%">
-                    <img src="img/Inisiasi (7).jpg" style="width:100%">
-                    <img src="img/Inisiasi (11).jpg" style="width:100%">
-                    <img src="img/Inisiasi (16).jpg" style="width:100%">
-                    <img src="img/Inisiasi (17).jpg" style="width:100%">
-                    <img src="img/Intern (3).jpg" style="width:100%">
-                    </div>  
-                    <div class="column">
-                    <img src="img/HIMSI (4).jpg" style="width:100%">
-                    <img src="img/HIMSI (5).jpg" style="width:100%">
-                    <img src="img/HIMSI (1).jpg" style="width:100%">
-                    <img src="img/Inisiasi (18).jpg" style="width:100%">
-                    <img src="img/Inisiasi (12).jpg" style="width:100%">
-                    <img src="img/Inisiasi (14).jpg" style="width:100%">
-                    <img src="img/Intern (2).jpg" style="width:100%">
-                    </div>
-                    <div class="column">
-                    <img src="img/HIMSI (6).jpg" style="width:100%">
-                    <img src="img/HIMSI (7).jpg" style="width:100%">
-                    <img src="img/Inisiasi (1).jpg" style="width:100%">
-                    <img src="img/Inisiasi (5).jpg" style="width:100%">
-                    <img src="img/Inisiasi (9).jpg" style="width:100%">
-                    <img src="img/Inisiasi (8).jpg" style="width:100%">
-                    <img src="img/Inisiasi (13).jpg" style="width:100%">
-                    <img src="img/pelatihan.jpg" style="width:100%">
-                    <img src="img/ManaTahan (2).jpg" style="width:100%">
-                    <img src="img/ManaTahan (1).jpg" style="width:100%">
-                    <img src="img/Inisiasi (4).jpg" style="width:100%">
-                    </div>
+    <!-- ===== ABOUT ===== -->
+    <section id="about">
+        <div class="card about">
+            <h2>Naomi Keisha Ananda</h2>
+            <p>Naomi is a graduate of the Bachelor of Information Systems study program this year. Have an interest in activities that involve teamwork from exchanging ideas to implementing an activity. Passionate about learning new things from people to the environment. Naomi has high responsibility for any task given, is able to manage her time well, and has high tolerance for others. Can contribute well in the environment and outside campus. There are many things that Naomi wants to develop and learn so that she can have an impact on the community around her.</p>
+        </div>
+        <div class="card about2">
+            <h3>Experience</h3>
+            <p>Naomi is an active student who participates in campus activities. Naomi once participated in an internship program at an IT company called Horus Technology. Her position was a Business Systems Analyst, focusing on UI/UX design for websites, self-service, or applications.</p>
+        </div>
+        <div class="card">
+            <div class="row">
+                <div class="column">
+                    <img src="img/Asisten-Dosen.jpg" />
+                    <img src="img/HIMSI (1).jpg" />
+                    <img src="img/HIMSI (8).jpg" />
+                    <img src="img/Inisiasi (2).jpg" />
+                    <img src="img/Inisiasi (6).jpg" />
+                    <img src="img/Inisiasi (10).jpg" />
+                    <img src="img/Inisiasi (15).jpg" />
+                    <img src="img/Intern (1).jpg" />
                 </div>
-        </section>
+                <div class="column">
+                    <img src="img/HIMSI (2).jpg" />
+                    <img src="img/HIMSI (3).jpg" />
+                    <img src="img/HIMSI (9).jpg" />
+                    <img src="img/Inisiasi (3).jpg" />
+                    <img src="img/Inisiasi (7).jpg" />
+                    <img src="img/Inisiasi (11).jpg" />
+                    <img src="img/Inisiasi (16).jpg" />
+                    <img src="img/Inisiasi (17).jpg" />
+                    <img src="img/Intern (3).jpg" />
+                </div>
+                <div class="column">
+                    <img src="img/HIMSI (4).jpg" />
+                    <img src="img/HIMSI (5).jpg" />
+                    <img src="img/HIMSI (1).jpg" />
+                    <img src="img/Inisiasi (18).jpg" />
+                    <img src="img/Inisiasi (12).jpg" />
+                    <img src="img/Inisiasi (14).jpg" />
+                    <img src="img/Intern (2).jpg" />
+                </div>
+                <div class="column">
+                    <img src="img/HIMSI (6).jpg" />
+                    <img src="img/HIMSI (7).jpg" />
+                    <img src="img/Inisiasi (1).jpg" />
+                    <img src="img/Inisiasi (5).jpg" />
+                    <img src="img/Inisiasi (9).jpg" />
+                    <img src="img/Inisiasi (8).jpg" />
+                    <img src="img/Inisiasi (13).jpg" />
+                    <img src="img/pelatihan.jpg" />
+                    <img src="img/ManaTahan (2).jpg" />
+                    <img src="img/ManaTahan (1).jpg" />
+                    <img src="img/Inisiasi (4).jpg" />
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <section id="portfolio">
-            <!-- Introductory section -->
+    <!-- ===== PORTFOLIO ===== -->
+    <section id="portfolio">
         <div class="portfolio-nav">
             <button onclick="scrollToCard('card1')"><i class="fas fa-paint-brush"></i> Design</button>
             <button onclick="scrollToCard('card2')"><i class="fas fa-code"></i> Prototype SIPETSAGA</button>
@@ -547,84 +312,79 @@
             <button onclick="scrollToCard('card4')"><i class="fas fa-video"></i> Content</button>
             <button onclick="scrollToCard('card5')"><i class="fas fa-diagnoses"></i> Social Media Admin</button>
         </div>
-
         <div class="card" id="card1">
             <h2>Design</h2>
             <p>Some designs were created using Adobe Photoshop, Corel Draw, and Canva.</p>
-
-            <!-- Photo Grid -->
-                <div class="row"> 
-                    <div class="column">
-                    <img src="img/1.png" style="width:100%">
-                    <img src="img/Cover Guide Book HIMSI&SI Celebration.png" style="width:100%">
-                    <img src="img/COREL DRAW.png" style="width:100%">
-                    </div>
-                    <div class="column">
-                    <img src="img/2.png" style="width:100%">
-                    <img src="img/Adobe Photoshop (2).png" style="width:100%">
-                    <img src="img/Infografik.png" style="width:100%">
-                    </div>  
-                    <div class="column">
-                    <img src="img/Adobe Photoshop (4).png" style="width:100%">
-                    <img src="img/Poster FTI.jpg" style="width:100%">
-                    <img src="img/COVER.jpg" style="width:100%">
-                    </div>
-                    <div class="column">
-                    <img src="img/Adobe Photoshop (3).png" style="width:100%">
-                    <img src="img/POSTER.jpg" style="width:100%">
-                    <img src="img/Filter IG KKN.png" style="width:100%">
-                    </div>
+            <div class="row">
+                <div class="column">
+                    <img src="img/1.png" />
+                    <img src="img/Cover Guide Book HIMSI&SI Celebration.png" />
+                    <img src="img/COREL DRAW.png" />
                 </div>
+                <div class="column">
+                    <img src="img/2.png" />
+                    <img src="img/Adobe Photoshop (2).png" />
+                    <img src="img/Infografik.png" />
+                </div>
+                <div class="column">
+                    <img src="img/Adobe Photoshop (4).png" />
+                    <img src="img/Poster FTI.jpg" />
+                    <img src="img/COVER.jpg" />
+                </div>
+                <div class="column">
+                    <img src="img/Adobe Photoshop (3).png" />
+                    <img src="img/POSTER.jpg" />
+                    <img src="img/Filter IG KKN.png" />
+                </div>
+            </div>
         </div>
         <div class="card" id="card2">
             <h2>Prototype SIPETSAGA</h2>
             <p>Course project in making a prototype for a petshop business created using Figma.</p>
-             <!-- Photo Grid -->
-                <div class="row"> 
-                    <div class="column">
-                    <img src="img/PET-LOGIN.png" style="width:100%">
-                    <img src="img/PET-Detail Produk.png" style="width:100%">
-                    <img src="img/PET-Ubah Pengguna.png" style="width:100%">
-                    </div>
-                    <div class="column">
-                    <img src="img/PET-Beranda.png" style="width:100%">
-                    <img src="img/PET-Display Barang.png" style="width:100%">
-                    <img src="img/PET-Transaksi (Produk).png" style="width:100%">
-                    </div>  
-                    <div class="column">
-                    <img src="img/PET-Hapus Barang.png" style="width:100%">
-                    <img src="img/PET-Input Pengguna.png" style="width:100%">
-                    <img src="img/PET-Laporan Mingguan.png" style="width:100%">
-                    </div>
-                    <div class="column">
-                    <img src="img/PET-Hapus Pengguna.png" style="width:100%">
-                    <img src="img/PET-Ubah Barang.png" style="width:100%">
-                    <img src="img/PET-Laporan Bulanan.png" style="width:100%">
-                    </div>
-        </div>
+            <div class="row">
+                <div class="column">
+                    <img src="img/PET-LOGIN.png" />
+                    <img src="img/PET-Detail Produk.png" />
+                    <img src="img/PET-Ubah Pengguna.png" />
+                </div>
+                <div class="column">
+                    <img src="img/PET-Beranda.png" />
+                    <img src="img/PET-Display Barang.png" />
+                    <img src="img/PET-Transaksi (Produk).png" />
+                </div>
+                <div class="column">
+                    <img src="img/PET-Hapus Barang.png" />
+                    <img src="img/PET-Input Pengguna.png" />
+                    <img src="img/PET-Laporan Mingguan.png" />
+                </div>
+                <div class="column">
+                    <img src="img/PET-Hapus Pengguna.png" />
+                    <img src="img/PET-Ubah Barang.png" />
+                    <img src="img/PET-Laporan Bulanan.png" />
+                </div>
+            </div>
         </div>
         <div class="card" id="card3">
             <h2>Prototype Eat Me</h2>
             <p>Course project in making a prototype for a dessert business created using Canva.</p>
-            <!-- Photo Grid -->
-                 <div class="row"> 
-                     <div class="column">
-                     <img src="img/Prototype-Eat-Me(1).jpg" style="width:100%">
-                     <img src="img/Prototype-Eat-Me(8).jpg" style="width:100%">
-                     </div>
-                     <div class="column">
-                     <img src="img/Prototype-Eat-Me(3).jpg" style="width:100%">
-                     <img src="img/Prototype-Eat-Me(9).jpg" style="width:100%">
-                     </div>  
-                     <div class="column">
-                     <img src="img/Prototype-Eat-Me(6).jpg" style="width:100%">
-                     <img src="img/Prototype-Eat-Me(10).jpg" style="width:100%">
-                     </div>
-                     <div class="column">
-                     <img src="img/Prototype-Eat-Me(7).jpg" style="width:100%">
-                     <img src="img/Prototype-Eat-Me(11).jpg" style="width:100%">
-                     </div>
-                 </div>
+            <div class="row">
+                <div class="column">
+                    <img src="img/Prototype-Eat-Me(1).jpg" />
+                    <img src="img/Prototype-Eat-Me(8).jpg" />
+                </div>
+                <div class="column">
+                    <img src="img/Prototype-Eat-Me(3).jpg" />
+                    <img src="img/Prototype-Eat-Me(9).jpg" />
+                </div>
+                <div class="column">
+                    <img src="img/Prototype-Eat-Me(6).jpg" />
+                    <img src="img/Prototype-Eat-Me(10).jpg" />
+                </div>
+                <div class="column">
+                    <img src="img/Prototype-Eat-Me(7).jpg" />
+                    <img src="img/Prototype-Eat-Me(11).jpg" />
+                </div>
+            </div>
         </div>
         <div class="card" id="card4">
             <h2>Content</h2>
@@ -632,59 +392,232 @@
             <div class="row">
                 <div class="column">
                     <video controls>
-                        <source src="img/PROMOSI_HIMPUNAN.mp4" type="video/mp4">
+                        <source src="img/PROMOSI_HIMPUNAN.mp4" type="video/mp4" />
                         Your browser does not support the video tag.
                     </video>
                     <video controls>
-                        <source src="img/PROMOSI_PRODI.mp4" type="video/mp4">
+                        <source src="img/PROMOSI_PRODI.mp4" type="video/mp4" />
                         Your browser does not support the video tag.
                     </video>
                 </div>
                 <div class="column">
                     <video controls>
-                        <source src="img/SOSIALISASI.mp4" type="video/mp4">
+                        <source src="img/SOSIALISASI.mp4" type="video/mp4" />
                         Your browser does not support the video tag.
                     </video>
                     <video controls>
-                        <source src="img/WAWANCARA_WISUDA.mp4" type="video/mp4">
+                        <source src="img/WAWANCARA_WISUDA.mp4" type="video/mp4" />
                         Your browser does not support the video tag.
                     </video>
                 </div>
                 <div class="column">
                     <video controls>
-                        <source src="img/TIKTOK_SI.mp4" type="video/mp4">
+                        <source src="img/TIKTOK_SI.mp4" type="video/mp4" />
                         Your browser does not support the video tag.
                     </video>
                     <video controls>
-                        <source src="img/PMB_SI.mp4" type="video/mp4">
+                        <source src="img/PMB_SI.mp4" type="video/mp4" />
                         Your browser does not support the video tag.
                     </video>
                 </div>
-        </div>
+            </div>
         </div>
         <div class="card" id="card5">
             <h2>Social Media Admin</h2>
             <p>The Instagram social media display of the Field Study and Community Service (Kuliah Kerja Nyata/KKN) group which I control from creating logos, feeds, daily content.</p>
-            <div class="row"> 
+            <div class="row">
                 <div class="column">
-                <img src="img/feed1.jpg" style="width:100%">
-                <img src="img/feed2.jpg" style="width:100%">
+                    <img src="img/feed1.jpg" />
+                    <img src="img/feed2.jpg" />
                 </div>
                 <div class="column">
-                <img src="img/feed3.jpg" style="width:100%">
-                <img src="img/feed4.jpg" style="width:100%">
+                    <img src="img/feed3.jpg" />
+                    <img src="img/feed4.jpg" />
                 </div>
-                </div>
-
-                <div class="button-container">
-                    <a href="https://www.instagram.com/bandung70_kkn85uajy" target="_blank">
-                        <button>Visit Instagram</button>
-                    </a>
-                </div>
+            </div>
+            <div class="button-container">
+                <a href="https://www.instagram.com/bandung70_kkn85uajy" target="_blank">
+                    <button>Visit Instagram</button>
+                </a>
+            </div>
         </div>
-        </section>
+    </section>
 
-        <section id="contact">
+    <!-- ===== TOOLS (NEW) ===== -->
+    <section id="tools">
+        <div class="card">
+            <h2>Tools I Use</h2>
+            <p>Tools for Business System Analyst focusing on process flows and UI/UX.</p>
+            <div class="tools-controls">
+                <input id="tool-search" type="text" placeholder="Search tools, skills, or features..." />
+                <span class="chip active" data-filter="All"><i class="fas fa-th"></i> All</span>
+                <span class="chip" data-filter="Modeling"><i class="fas fa-project-diagram"></i> Modeling</span>
+                <span class="chip" data-filter="Design"><i class="fas fa-pencil-ruler"></i> Design</span>
+                <span class="chip" data-filter="PM"><i class="fas fa-tasks"></i> PM</span>
+                <span class="chip" data-filter="Docs"><i class="fas fa-file-alt"></i> Docs</span>
+            </div>
+            <div class="tools-grid">
+                <!-- Bizagi -->
+                <div class="tool-card" data-tags="Modeling">
+                    <span class="pill">BPMN</span>
+                    <div class="logo"><img src="https://cdn.simpleicons.org/bizagi" alt="Bizagi logo" /></div>
+                    <h4>Bizagi Modeler</h4>
+                    <p>Process modeling with BPMN: AS-IS/TO-BE flows, swimlanes, gateways.</p>
+                    <div class="badges">
+                        <span class="badge">BPMN 2.0</span><span class="badge">Swimlane</span><span class="badge">Export PDF</span>
+                    </div>
+                    <div class="tool-footer">
+                        <small>Category: Modeling</small>
+                        <button class="learn-btn" data-url="https://www.bizagi.com/">Learn</button>
+                    </div>
+                    <div class="more" style="display:none; margin-top:10px; text-align:left;">
+                        <ul>
+                            <li>Map end-to-end processes with roles and systems.</li>
+                            <li>Validate gateways and data objects for completeness.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Figma -->
+                <div class="tool-card" data-tags="Design">
+                    <span class="pill">UI/Prototype</span>
+                    <div class="logo"><img src="https://cdn.simpleicons.org/figma" alt="Figma logo" /></div>
+                    <h4>Figma</h4>
+                    <p>High/low-fidelity UI, prototyping, and team collaboration in real time.</p>
+                    <div class="badges">
+                        <span class="badge">Auto Layout</span><span class="badge">Prototype</span><span class="badge">Component</span>
+                    </div>
+                    <div class="tool-footer">
+                        <small>Category: Design</small>
+                        <button class="learn-btn" data-url="https://www.figma.com/">Learn</button>
+                    </div>
+                    <div class="more" style="display:none; margin-top:10px; text-align:left;">
+                        <ul>
+                            <li>Create design systems & tokens.</li>
+                            <li>Interactive prototypes for user testing.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- draw.io -->
+                <div class="tool-card" data-tags="Modeling">
+                    <span class="pill">Diagram</span>
+                    <div class="logo"><img src="https://cdn.simpleicons.org/diagramsdotnet" alt="draw.io logo" /></div>
+                    <h4>draw.io (diagrams.net)</h4>
+                    <p>Flexible diagramming for wireflows, ERD, and architecture sketching.</p>
+                    <div class="badges">
+                        <span class="badge">Wireflow</span><span class="badge">ERD</span><span class="badge">Flowchart</span>
+                    </div>
+                    <div class="tool-footer">
+                        <small>Category: Modeling</small>
+                        <button class="learn-btn" data-url="https://www.diagrams.net/">Learn</button>
+                    </div>
+                    <div class="more" style="display:none; margin-top:10px; text-align:left;">
+                        <ul>
+                            <li>Fast flow mapping for stakeholder workshops.</li>
+                            <li>Export SVG/PNG for documents.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Visio -->
+                <div class="tool-card" data-tags="Modeling">
+                    <span class="pill">Flowchart</span>
+                    <div class="logo"><img src="https://cdn.simpleicons.org/microsoftvisio" alt="Visio logo" /></div>
+                    <h4>Microsoft Visio</h4>
+                    <p>Enterprise-grade flowcharts and process diagrams integrated with Office.</p>
+                    <div class="badges">
+                        <span class="badge">Templates</span><span class="badge">Stencils</span><span class="badge">Org Chart</span>
+                    </div>
+                    <div class="tool-footer">
+                        <small>Category: Modeling</small>
+                        <button class="learn-btn" data-url="https://www.microsoft.com/visio">Learn</button>
+                    </div>
+                    <div class="more" style="display:none; margin-top:10px; text-align:left;">
+                        <ul>
+                            <li>Great for standardized corporate diagrams.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Adobe XD -->
+                <div class="tool-card" data-tags="Design">
+                    <span class="pill">Prototype</span>
+                    <div class="logo"><img src="https://cdn.simpleicons.org/adobexd" alt="Adobe XD logo" /></div>
+                    <h4>Adobe XD</h4>
+                    <p>Screen design and prototyping with micro-interactions.</p>
+                    <div class="badges">
+                        <span class="badge">Component</span><span class="badge">Auto-animate</span>
+                    </div>
+                    <div class="tool-footer">
+                        <small>Category: Design</small>
+                        <button class="learn-btn" data-url="https://www.adobe.com/products/xd.html">Learn</button>
+                    </div>
+                    <div class="more" style="display:none; margin-top:10px; text-align:left;">
+                        <ul>
+                            <li>Good for quick interactive demos.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Jira -->
+                <div class="tool-card" data-tags="PM">
+                    <span class="pill">Agile</span>
+                    <div class="logo"><img src="https://cdn.simpleicons.org/jira" alt="Jira logo" /></div>
+                    <h4>Jira</h4>
+                    <p>Backlog, sprint planning, and issue tracking with custom workflows.</p>
+                    <div class="badges">
+                        <span class="badge">User Story</span><span class="badge">Kanban</span><span class="badge">Sprint</span>
+                    </div>
+                    <div class="tool-footer">
+                        <small>Category: PM</small>
+                        <button class="learn-btn" data-url="https://www.atlassian.com/software/jira">Learn</button>
+                    </div>
+                    <div class="more" style="display:none; margin-top:10px; text-align:left;">
+                        <ul>
+                            <li>Define epics & acceptance criteria from BSA specs.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Excel -->
+                <div class="tool-card" data-tags="Docs">
+                    <span class="pill">Analysis</span>
+                    <div class="logo"><img src="https://cdn.simpleicons.org/microsoftexcel" alt="Excel logo" /></div>
+                    <h4>Microsoft Excel</h4>
+                    <p>Requirement matrices, prioritization, and quick data analysis.</p>
+                    <div class="badges">
+                        <span class="badge">Lookup</span><span class="badge">Pivot</span><span class="badge">Matrix</span>
+                    </div>
+                    <div class="tool-footer">
+                        <small>Category: Docs</small>
+                        <button class="learn-btn" data-url="https://www.microsoft.com/microsoft-365/excel">Learn</button>
+                    </div>
+                    <div class="more" style="display:none; margin-top:10px; text-align:left;">
+                        <ul>
+                            <li>Traceability matrix: Requirement → Design → Test.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Word -->
+                <div class="tool-card" data-tags="Docs">
+                    <span class="pill">Specs</span>
+                    <div class="logo"><img src="https://cdn.simpleicons.org/microsoftword" alt="Word logo" /></div>
+                    <h4>Microsoft Word</h4>
+                    <p>BRD/FRD/SRS documentation and stakeholder-ready reports.</p>
+                    <div class="badges">
+                        <span class="badge">Templates</span><span class="badge">Styles</span><span class="badge">Review</span>
+                    </div>
+                    <div class="tool-footer">
+                        <small>Category: Docs</small>
+                        <button class="learn-btn" data-url="https://www.microsoft.com/microsoft-365/word">Learn</button>
+                    </div>
+                    <div class="more" style="display:none; margin-top:10px; text-align:left;">
+                        <ul>
+                            <li>Use comments & track changes for review cycles.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact">
         <div class="card">
             <h2>Contact</h2>
             <div class="profile">
@@ -695,21 +628,23 @@
                 </div>
                 <div class="contact-social-media">
                     <a href="mailto:naomikeisha1@gmail.com"><i class="fas fa-envelope"></i> naomikeisha1@gmail.com</a>
-                    <a href="https://www.instagram.com/namikeshi_/" target="_blank"><i class="fab fa-instagram"></i> namikeshi_</a>
+                    <a href="https://www.instagram.com/namikeshi_/" target="blank"><i class="fab fa-instagram"></i> namikeshi</a>
                     <a href="https://wa.me/6281328419569" target="_blank"><i class="fab fa-whatsapp"></i> +6281328419569</a>
                     <a href="https://www.linkedin.com/in/namikes" target="_blank"><i class="fab fa-linkedin"></i> Naomi Keisha Ananda</a>
                 </div>
             </div>
         </div>
     </section>
+</div>
 
-    </div>
-    <footer>
-        <p></p>
-    </footer>
-    <div id="imgModal" class="modal">
-        <span class="close">&times;</span>
-        <img class="modal-content" id="modalImg">
-    </div>    
+<footer>
+    <p></p>
+</footer>
+
+<!-- Image Modal -->
+<div id="imgModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImg" />
+</div>
 </body>
 </html>
