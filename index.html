@@ -305,13 +305,15 @@
 
     <!-- ===== PORTFOLIO ===== -->
     <section id="portfolio">
-        <div class="portfolio-nav">
-            <button onclick="scrollToCard('card1')"><i class="fas fa-paint-brush"></i> Design</button>
-            <button onclick="scrollToCard('card2')"><i class="fas fa-code"></i> Prototype SIPETSAGA</button>
-            <button onclick="scrollToCard('card3')"><i class="fas fa-code"></i> Prototype Eat Me</button>
-            <button onclick="scrollToCard('card4')"><i class="fas fa-video"></i> Content</button>
-            <button onclick="scrollToCard('card5')"><i class="fas fa-diagnoses"></i> Social Media Admin</button>
-        </div>
+    <div class="portfolio-nav">
+        <button onclick="scrollToCard('card1')"><i class="fas fa-paint-brush"></i> Design</button>
+        <button onclick="scrollToCard('card2')"><i class="fas fa-code"></i> Prototype SIPETSAGA</button>
+        <button onclick="scrollToCard('card3')"><i class="fas fa-code"></i> Prototype Eat Me</button>
+        <button onclick="scrollToCard('card4')"><i class="fas fa-video"></i> Content</button>
+        <button onclick="scrollToCard('card5')"><i class="fas fa-diagnoses"></i> Social Media Admin</button>
+        <button onclick="scrollToCard('card6')"><i class="fas fa-laptop-code"></i> Prototype Design</button>
+        <button onclick="scrollToCard('card7')"><i class="fas fa-project-diagram"></i> UML Diagrams</button>
+    </div>
         <div class="card" id="card1">
             <h2>Design</h2>
             <p>Some designs were created using Adobe Photoshop, Corel Draw, and Canva.</p>
@@ -441,6 +443,41 @@
                 </a>
             </div>
         </div>
+        <div class="card" id="card6">
+    <h2>Prototype Design</h2>
+    <p>Interactive prototypes created using <b>Figma</b>. Users can preview directly below or open in a new tab.</p>
+
+        <!-- Figma Embed -->
+    <div class="figma-embed">
+        <iframe 
+            style="border:1px solid #ccc;" 
+            width="100%" 
+            height="450" 
+            src="https://shorturl.at/24rF1" 
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <div class="button-container">
+        <a href="https://shorturl.at/24rF1">
+            <button>Open in Figma</button>
+        </a>
+    </div>
+</div>
+        <div class="card" id="card7">
+        <h2>UML Diagrams</h2>
+        <p>System analysis and modeling diagrams using <b>Bizagi</b>, <b>draw.io</b>, and <b>Visio</b>. Includes Use Case, Activity, and Class Diagrams.</p>
+        <div class="row">
+            <div class="column">
+                <img src="img/uml-usecase.png" alt="Use Case Diagram" />
+                <img src="img/uml-activity.png" alt="Activity Diagram" />
+            </div>
+            <div class="column">
+                <img src="img/uml-class.png" alt="Class Diagram" />
+                <img src="img/uml-sequence.png" alt="Sequence Diagram" />
+            </div>
+        </div>
+    </div>
     </section>
 
     <!-- ===== TOOLS (NEW) ===== -->
