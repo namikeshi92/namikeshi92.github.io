@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --pink: #ff69b4;
@@ -15,7 +16,7 @@
             --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         body {
-            font-family: Georgia, 'Times New Roman', Times, serif, sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
             background-color: var(--bg);
@@ -187,6 +188,110 @@
   background: var(--pink-strong);
   transform: scale(1.05);
 }
+
+        /* ===== MODERN HOME ===== */
+.home-hero {
+  min-height: 80vh;
+  background: linear-gradient(135deg, #ffd1e8, #f48fb1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px 20px;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.home-avatar {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 10px 25px rgba(0,0,0,.2);
+  margin-bottom: 20px;
+}
+
+.home-hero h1 {
+  font-size: 42px;
+  margin: 10px 0;
+}
+
+.home-hero h1 span {
+  color: var(--pink-strong);
+}
+
+.tagline {
+  font-size: 18px;
+  opacity: 0.85;
+  margin-bottom: 20px;
+}
+
+.home-social {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.home-social a {
+  font-size: 22px;
+  color: #333;
+  background: #fff;
+  padding: 10px;
+  border-radius: 50%;
+  transition: transform .3s, background .3s;
+}
+
+.home-social a:hover {
+  background: var(--pink-strong);
+  color: #fff;
+  transform: translateY(-5px);
+}
+
+.home-actions {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.home-actions button {
+  padding: 12px 26px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  background: var(--pink-strong);
+  color: #fff;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.home-actions button.outline {
+  background: transparent;
+  border: 2px solid var(--pink-strong);
+  color: var(--pink-strong);
+}
+
+.home-actions button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0,0,0,.2);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .home-hero h1 {
+    font-size: 32px;
+  }
+
+  .tagline {
+    font-size: 16px;
+  }
+
+  .home-avatar {
+    width: 130px;
+    height: 130px;
+  }
+}
     </style>
     <script>
         function showSection(sectionId) {
@@ -269,21 +374,25 @@
 <div class="container">
     <!-- ===== HOME ===== -->
     <section id="home" class="active">
-        <div class="card">
-            <div class="profile">
-                <img src="img/foto.png" alt="Foto Diri" />
-                <div>
-                    <h1>I'm Naomi</h1>
-                    <p>Interest in the world of E-marketing and Design</p>
-                </div>
-                <div class="social-media">
-                    <a href="https://www.linkedin.com/in/namikes" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://www.instagram.com/namikeshi_/" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://wa.me/6281328419569" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
+  <div class="home-hero">
+    <img src="img/foto.png" alt="Naomi Photo" class="home-avatar">
+
+    <h1>Hi, I’m <span>Naomi</span></h1>
+    <p class="tagline">Business System Analyst • UI/UX • Digital Marketing</p>
+
+    <div class="home-social">
+      <a href="https://www.linkedin.com/in/namikes" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="https://www.instagram.com/namikeshi_/" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://wa.me/6281328419569" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    </div>
+
+    <div class="home-actions">
+      <button onclick="showSection('portfolio')">View Portfolio</button>
+      <button class="outline" onclick="showSection('contact')">Contact Me</button>
+    </div>
+  </div>
+</section>
+
 
     <!-- ===== ABOUT ===== -->
     <section id="about">
