@@ -44,6 +44,11 @@
           line-height: 1.7;
           color: #555;
         }
+
+        button:focus-visible {
+          outline: 3px solid rgba(233,30,99,.4);
+          outline-offset: 3px;
+        }
         nav {
             text-align: center;
             margin-top: 10px;
@@ -53,25 +58,64 @@
             transform: translate(-50%, -50%);
         }
         nav button {
-            background: #ffffff;
-            color: var(--pink);
-            border: none;
-            padding: 10px 20px;
-            margin: 0 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s, transform 0.3s;
-            border-radius: 20px;
-            display: inline-flex;
-            align-items: center;
-            vertical-align: middle;
+        background: transparent;
+        border: 2px solid var(--primary);
+        color: var(--primary);
+        padding: 8px 18px;
+        border-radius: 999px;
+        font-weight: 500;
+        transition: all .25s ease;
         }
         nav button i { margin-right: 5px; }
         nav button:hover {
-            background: var(--pink-strong);
-            color: #ffffff;
+            background: var(--primary);
+            color: #fff;
             transform: scale(1.1);
         }
+        .nav button.active {
+          background: var(--primary);
+          color: #fff;
+        }
+
+        .home-actions {
+          display: flex;
+          gap: 16px;
+          justify-content: center;
+          margin-top: 24px;
+        }
+
+        .btn-primary {
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        padding: 12px 28px;
+        border-radius: 999px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all .25s ease;
+      }
+      
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(233,30,99,.35);
+      }
+      
+      /* secondary */
+      .btn-outline {
+        background: transparent;
+        border: 2px solid var(--primary);
+        color: var(--primary);
+        padding: 12px 28px;
+        border-radius: 999px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all .25s ease;
+      }
+      
+      .btn-outline:hover {
+        background: var(--primary);
+        color: #fff;
+      }
 
         .about { display: inline-block; text-align: center; align-items: center; justify-content: center; padding: 60px 90px; position: relative; box-sizing: border-box; width: 100%; }
 
@@ -444,8 +488,13 @@
     </div>
 
     <div class="home-actions">
-      <button onclick="showSection('portfolio')">View Portfolio</button>
-      <button class="outline" onclick="showSection('contact')">Contact Me</button>
+    <button class="btn-primary" onclick="showSection('portfolio')">
+      View Portfolio
+    </button>
+  
+    <button class="btn-outline" onclick="showSection('contact')">
+      Contact Me
+    </button>
     </div>
   </div>
 </section>
