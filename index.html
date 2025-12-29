@@ -295,6 +295,34 @@
     height: 130px;
   }
 }
+
+      .video-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.video-row video {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;   /* PAKSA LANDSCAPE */
+  object-fit: cover;
+  max-height: 240px;      /* 🔴 INI KUNCI */
+  border-radius: 12px;
+  background: #000;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .video-row {
+    grid-template-columns: 1fr;
+  }
+
+  .video-row video {
+    max-height: none;
+  }
+}
     </style>
     <script>
         function showSection(sectionId) {
@@ -463,7 +491,7 @@
         <!-- <button onclick="scrollToCard('card2')"><i class="fas fa-code"></i> Prototype SIPETSAGA</button>
         <button onclick="scrollToCard('card3')"><i class="fas fa-code"></i> Prototype Eat Me</button> -->
         <button onclick="scrollToCard('card4')"><i class="fas fa-video"></i> Content</button>
-        <button onclick="scrollToCard('card5')"><i class="fas fa-scissors"></i> Editing</button>
+        <button onclick="scrollToCard('card5')"><i class="fas fa-cut"></i> Editing</button>
         <!-- <button onclick="scrollToCard('card5')"><i class="fas fa-diagnoses"></i> Social Media Admin</button> -->
         <button onclick="scrollToCard('card6')"><i class="fas fa-laptop-code"></i> Prototype Design</button>
         <button onclick="scrollToCard('card7')"><i class="fas fa-project-diagram"></i> UML Diagrams</button>
@@ -587,18 +615,18 @@
       <div class="card" id="card5">
       <h2>Video Editing</h2>
       <p>A showcase of my video editing work, including cuts, transitions, and final outputs.</p>
+    
       <div class="video-row">
-        <video controls>
-          <source src="img/Smart Estimator for Construction.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
+        <video controls preload="metadata">
+          <source src="img/Smart Estimator for Construction.mp4" type="video/mp4">
         </video>
-        <video controls>
-          <source src="img/Beach.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
+    
+        <video controls preload="metadata">
+          <source src="img/Beach.mp4" type="video/mp4">
         </video>
-        <video controls>
-          <source src="img/Intro.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
+    
+        <video controls preload="metadata">
+          <source src="img/Intro.mp4" type="video/mp4">
         </video>
       </div>
     </div>
