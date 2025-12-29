@@ -57,13 +57,12 @@
         }
         .nav-btn {
           background: transparent;
-          border: none;                 /* TANPA OUTLINE */
+          border: none;
           color: var(--primary);
-          padding: 8px 16px;
+          padding: 8px 14px;
           border-radius: 999px;
+          font-size: 14px;
           font-weight: 500;
-          cursor: pointer;
-          transition: all .25s ease;
         }
         .nav-btn i {
           margin-right: 6px;
@@ -79,7 +78,7 @@
         .nav-btn.active {
           background: var(--primary);
           color: #fff;
-          box-shadow: 0 8px 24px rgba(233,30,99,.35);
+          box-shadow: 0 6px 16px rgba(233,30,99,.35);
         }
 
         .home-actions {
@@ -398,15 +397,49 @@
     border-radius: 12px;
     background: #000;
 }
+      .site-header {
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  border-bottom: 1px solid #eee;
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* LOGO */
+.logo {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* NAV */
+.nav {
+  display: flex;
+  gap: 10px;
+}
     </style>
     <script>
-        function showSection(sectionId) {
-            var sections = document.querySelectorAll('section, .about, .profile');
-            sections.forEach(function (section) { section.classList.remove('active'); });
-            document.getElementById(sectionId).classList.add('active');
-            // Scroll to top of container when switching
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+      function showSection(sectionId, btn) {
+        // section
+        document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+        document.getElementById(sectionId).classList.add('active');
+      
+        // nav active
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+      
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
         function scrollToCard(cardId) {
             const card = document.getElementById(cardId);
             if (card) { card.scrollIntoView({ behavior: 'smooth' }); }
@@ -466,25 +499,28 @@
     </script>
 </head>
 <body>
-<header>
-    <h1>My Portfolio</h1>
+<header class="site-header">
+  <div class="header-inner">
+    <h1 class="logo">My Portfolio</h1>
+
     <nav class="nav">
-  <button class="nav-btn" onclick="showSection('home', this)">
-    <i class="fas fa-home"></i> Home
-  </button>
-  <button class="nav-btn" onclick="showSection('about', this)">
-    <i class="fas fa-user"></i> About
-  </button>
-  <button class="nav-btn" onclick="showSection('portfolio', this)">
-    <i class="fas fa-briefcase"></i> Portfolio
-  </button>
-  <button class="nav-btn" onclick="showSection('tools', this)">
-    <i class="fas fa-tools"></i> Tools
-  </button>
-  <button class="nav-btn" onclick="showSection('contact', this)">
-    <i class="fas fa-phone-alt"></i> Contact
-  </button>
-</nav>
+      <button class="nav-btn active" onclick="showSection('home', this)">
+        <i class="fas fa-home"></i> Home
+      </button>
+      <button class="nav-btn" onclick="showSection('about', this)">
+        <i class="fas fa-user"></i> About
+      </button>
+      <button class="nav-btn" onclick="showSection('portfolio', this)">
+        <i class="fas fa-briefcase"></i> Portfolio
+      </button>
+      <button class="nav-btn" onclick="showSection('tools', this)">
+        <i class="fas fa-tools"></i> Tools
+      </button>
+      <button class="nav-btn" onclick="showSection('contact', this)">
+        <i class="fas fa-phone-alt"></i> Contact
+      </button>
+    </nav>
+  </div>
 </header>
 
 <div class="container">
