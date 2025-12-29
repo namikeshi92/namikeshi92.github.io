@@ -59,6 +59,7 @@
         .nav-btn {
            border: none;
           background: transparent;
+          position: relative;
           color: #555;
           font-size: 14px;
           padding: 8px 14px;
@@ -86,7 +87,6 @@
         }
       .nav-btn.active::after {
           content: "";
-          position: absolute;
           left: 12px;
           right: 12px;
           bottom: -6px;
@@ -170,8 +170,10 @@
         .column video { margin-top: 8px; vertical-align: middle; width: 100%; transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; }
         .column video:hover { transform: scale(1.1); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); }
 
-        section { display: none; padding: 20px; margin-top: 20px; opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s; }
-        .active { display: block; opacity: 1; transform: translateY(0); }
+        section {
+          padding: 80px 0;
+          scroll-margin-top: 110px;
+        }
         .container { max-width: 1200px; margin: auto; overflow: hidden; padding: 0 20px; }
         footer { background: #fff; color: #000; text-align: right; width: 100%; bottom: 0; box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1); position: relative; }
         footer h1 { margin: 15px; }
@@ -655,7 +657,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <div class="container">
     <!-- ===== HOME ===== -->
-    <section id="home" class="active">
+    <section id="home">
   <div class="home-hero">
     <img src="img/foto.png" alt="Naomi Photo" class="home-avatar">
 
