@@ -531,24 +531,32 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   /* =====================
-     NAV (HEADER + FLOATING)
+     NAV SCROLL
   ====================== */
   const navButtons = document.querySelectorAll('[data-target]');
   const sections = document.querySelectorAll('section');
 
   navButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const target = document.getElementById(btn.dataset.target);
-    if (!target) return;
+    btn.addEventListener('click', () => {
+      const target = document.getElementById(btn.dataset.target);
+      if (!target) return;
 
-    const yOffset = -90; // tinggi header
-    const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      const yOffset = -90;
+      const y =
+        target.getBoundingClientRect().top +
+        window.pageYOffset +
+        yOffset;
 
-    window.scrollTo({ top: y, behavior: 'smooth' });
+      window.scrollTo({
+        top: y,
+        behavior: 'smooth'
       });
     });
   });
 
+  /* =====================
+     AUTO ACTIVE ON SCROLL
+  ====================== */
   window.addEventListener('scroll', () => {
     let current = '';
 
@@ -566,7 +574,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-
   /* =====================
      IMAGE MODAL
   ====================== */
@@ -582,9 +589,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  closeModal.addEventListener('click', () => modal.style.display = 'none');
-  modal.addEventListener('click', () => modal.style.display = 'none');
-
+  closeModal?.addEventListener('click', () => modal.style.display = 'none');
+  modal?.addEventListener('click', () => modal.style.display = 'none');
 
   /* =====================
      TOOLS FILTER
@@ -606,9 +612,8 @@ document.addEventListener('DOMContentLoaded', () => {
         activeFilter === 'All' || tags.includes(activeFilter);
       const matchSearch = !q || text.includes(q);
 
-      card.style.display = (matchFilter && matchSearch)
-        ? 'block'
-        : 'none';
+      card.style.display =
+        matchFilter && matchSearch ? 'block' : 'none';
     });
   }
 
@@ -621,26 +626,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  search.addEventListener('input', filterTools);
-
+  search?.addEventListener('input', filterTools);
 
   /* =====================
-     TOOL CARD INTERACTION
+     TOOL CARD LINK
   ====================== */
   document.querySelectorAll('.learn-btn').forEach(btn => {
     btn.addEventListener('click', e => {
       e.stopPropagation();
       const url = btn.dataset.url;
       if (url) window.open(url, '_blank');
-    });
-  });
-
-  document.querySelectorAll('.tool-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const more = card.querySelector('.more');
-      if (!more) return;
-      more.style.display =
-        more.style.display === 'block' ? 'none' : 'block';
     });
   });
 
@@ -690,11 +685,11 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
 
     <div class="home-actions">
-    <button class="btn-outline" onclick="showSection('portfolio')">
+    <button class="nav-btn" data-target="portfolio">
       View Portfolio
     </button>
-  
-    <button class="btn-outline" onclick="showSection('contact')">
+    
+    <button class="nav-btn" data-target="contact">
       Contact Me
     </button>
     </div>
