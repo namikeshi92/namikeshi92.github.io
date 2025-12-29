@@ -11,20 +11,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --pink: #ff69b4;
-            --pink-strong: #ff1493;
-            --text: #333;
-            --card: #f9f9f9;
-            --bg: #f0f0f0;
-            --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+      --primary: #E91E63;
+      --secondary: #F8BBD0;
+      --bg: #F9F9FB;
+      --card: #FFFFFF;
+      --text: #2E2E2E;
+      }
         body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg);
-            color: var(--text);
-        }
+        background: var(--bg);
+        color: var(--text);
+      }
         header {
             background: #fff;
             color: #000;
@@ -35,6 +31,18 @@
         }
         header h1 {
             margin: 25px;
+            font-size: 42px;
+            font-weight: 600;
+        }
+        h2 {
+          font-size: 28px;
+          font-weight: 600;
+          margin-bottom: 12px;
+        }
+        p {
+          font-size: 15px;
+          line-height: 1.7;
+          color: #555;
         }
         nav {
             text-align: center;
@@ -106,7 +114,14 @@
         footer { background: #fff; color: #000; text-align: right; width: 100%; bottom: 0; box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1); position: relative; }
         footer h1 { margin: 15px; }
 
-        .card { background: var(--card); padding: 20px; margin-bottom: 20px; border-radius: 10px; box-shadow: var(--shadow); transition: transform 0.3s; text-align: center; }
+        .card { 
+          background: var(--card); 
+          padding: 32px; 
+          margin-bottom: 40px; 
+          border-radius: 16px; 
+          box-shadow: 0 6px 18px rgba(0,0,0,.08); 
+          transition: transform 0.3s; 
+          text-align: center; }
         .card:hover { transform: translateY(-10px); }
 
         * { box-sizing: border-box; }
@@ -300,15 +315,13 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  margin-top: 20px;
+  margin-top: 24px;
 }
 
 .video-row video {
   width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;   /* PAKSA LANDSCAPE */
+  aspect-ratio: 16 / 9;
   object-fit: cover;
-  max-height: 240px;      /* 🔴 INI KUNCI */
   border-radius: 12px;
   background: #000;
 }
