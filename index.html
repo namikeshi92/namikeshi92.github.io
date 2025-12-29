@@ -463,13 +463,27 @@
 <body>
 <header>
     <h1>My Portfolio</h1>
-    <nav>
-        <button onclick="showSection('home')"><i class='fas fa-home'></i> Home</button>
-        <button onclick="showSection('about')"><i class='fas fa-user'></i> About</button>
-        <button onclick="showSection('portfolio')"><i class='fas fa-briefcase'></i> Portfolio</button>
-        <button onclick="showSection('tools')"><i class='fas fa-tools'></i> Tools</button>
-        <button onclick="showSection('contact')"><i class='fas fa-phone-alt'></i> Contact</button>
-    </nav>
+    <nav class="nav">
+  <button class="nav-btn active" onclick="showSection('home', this)">
+    <i class="fas fa-home"></i> Home
+  </button>
+
+  <button class="nav-btn" onclick="showSection('about', this)">
+    <i class="fas fa-user"></i> About
+  </button>
+
+  <button class="nav-btn" onclick="showSection('portfolio', this)">
+    <i class="fas fa-briefcase"></i> Portfolio
+  </button>
+
+  <button class="nav-btn" onclick="showSection('tools', this)">
+    <i class="fas fa-tools"></i> Tools
+  </button>
+
+  <button class="nav-btn" onclick="showSection('contact', this)">
+    <i class="fas fa-phone-alt"></i> Contact
+  </button>
+</nav>
 </header>
 
 <div class="container">
@@ -488,7 +502,7 @@
     </div>
 
     <div class="home-actions">
-    <button class="btn-primary" onclick="showSection('portfolio')">
+    <button class="btn-outline" onclick="showSection('portfolio')">
       View Portfolio
     </button>
   
