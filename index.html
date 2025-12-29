@@ -54,6 +54,7 @@
           gap: 10px;
           justify-content: flex-end;
           padding: 0 24px 12px;
+          bottom: 24px;
         }
         .nav-btn {
            border: none;
@@ -507,131 +508,147 @@
 }
     </style>
     <script>
-    const navButtons = document.querySelectorAll('.floating-nav button');
-    const sections = document.querySelectorAll('section');
-    
-    navButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const target = document.getElementById(btn.dataset.target);
-        target.scrollIntoView({ behavior: 'smooth' });
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* =====================
+     NAV (HEADER + FLOATING)
+  ====================== */
+  const navButtons = document.querySelectorAll('[data-target]');
+  const sections = document.querySelectorAll('section');
+
+  navButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = document.getElementById(btn.dataset.target);
+      if (!target) return;
+
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
       });
     });
-    
-    /* AUTO HIGHLIGHT ON SCROLL */
-    window.addEventListener('scroll', () => {
-      let current = '';
-    
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop - 120;
-        if (scrollY >= sectionTop) {
-          current = section.id;
-        }
-      });
-    
-      navButtons.forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.dataset.target === current) {
-          btn.classList.add('active');
-        }
-      });
-    });
-      
-      function showSection(sectionId, btn) {
-        document.querySelectorAll("section").forEach(s => {
-          s.classList.remove("active");
-        });
-      
-        document.getElementById(sectionId).classList.add("active");
-      
-        document.querySelectorAll(".nav-btn").forEach(b => {
-          b.classList.remove("active");
-        });
-      
-        if (btn) btn.classList.add("active");
-      
-        window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+
+    sections.forEach(section => {
+      if (window.scrollY >= section.offsetTop - 160) {
+        current = section.id;
       }
+    });
 
-        function scrollToCard(cardId) {
-            const card = document.getElementById(cardId);
-            if (card) { card.scrollIntoView({ behavior: 'smooth' }); }
-        }
-        document.addEventListener('DOMContentLoaded', () => {
-            // Modal for images
-            const images = document.querySelectorAll('.column img, .profile img');
-            const modal = document.getElementById('imgModal');
-            const modalImg = document.getElementById('modalImg');
-            const closeModal = document.getElementsByClassName('close')[0];
-            images.forEach(image => { image.addEventListener('click', () => { modal.style.display = 'block'; modalImg.src = image.src; }); });
-            closeModal.onclick = () => modal.style.display = 'none';
-            modal.onclick = () => modal.style.display = 'none';
+    navButtons.forEach(btn => {
+      btn.classList.toggle(
+        'active',
+        btn.dataset.target === current
+      );
+    });
+  });
 
-            // ===== Tools interactions =====
-            const chips = document.querySelectorAll('.chip');
-            const search = document.getElementById('tool-search');
-            const cards = document.querySelectorAll('.tool-card');
 
-            let activeFilter = 'All';
-            chips.forEach(chip => {
-                chip.addEventListener('click', () => {
-                    chips.forEach(c => c.classList.remove('active'));
-                    chip.classList.add('active');
-                    activeFilter = chip.dataset.filter;
-                    filterTools();
-                });
-            });
-            search.addEventListener('input', filterTools);
+  /* =====================
+     IMAGE MODAL
+  ====================== */
+  const images = document.querySelectorAll('.column img, .profile img');
+  const modal = document.getElementById('imgModal');
+  const modalImg = document.getElementById('modalImg');
+  const closeModal = document.querySelector('.close');
 
-            function filterTools() {
-                const q = search.value.toLowerCase();
-                cards.forEach(card => {
-                    const tags = card.dataset.tags.split(',');
-                    const text = card.innerText.toLowerCase();
-                    const matchesFilter = (activeFilter === 'All') || tags.includes(activeFilter);
-                    const matchesSearch = !q || text.includes(q);
-                    card.style.display = (matchesFilter && matchesSearch) ? 'block' : 'none';
-                });
-            }
-            // open external link from button
-            document.querySelectorAll('.learn-btn').forEach(btn => {
-                btn.addEventListener('click', e => {
-                    e.stopPropagation();
-                    const url = btn.dataset.url;
-                    if (url) window.open(url, '_blank');
-                });
-            });
-            // card click toggles details
-            document.querySelectorAll('.tool-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const more = card.querySelector('.more');
-                    more.style.display = more.style.display === 'block' ? 'none' : 'block';
-                });
-            });
-        });
-    </script>
+  images.forEach(img => {
+    img.addEventListener('click', () => {
+      modal.style.display = 'block';
+      modalImg.src = img.src;
+    });
+  });
+
+  closeModal.addEventListener('click', () => modal.style.display = 'none');
+  modal.addEventListener('click', () => modal.style.display = 'none');
+
+
+  /* =====================
+     TOOLS FILTER
+  ====================== */
+  const chips = document.querySelectorAll('.chip');
+  const search = document.getElementById('tool-search');
+  const cards = document.querySelectorAll('.tool-card');
+
+  let activeFilter = 'All';
+
+  function filterTools() {
+    const q = search.value.toLowerCase();
+
+    cards.forEach(card => {
+      const tags = card.dataset.tags.split(',');
+      const text = card.innerText.toLowerCase();
+
+      const matchFilter =
+        activeFilter === 'All' || tags.includes(activeFilter);
+      const matchSearch = !q || text.includes(q);
+
+      card.style.display = (matchFilter && matchSearch)
+        ? 'block'
+        : 'none';
+    });
+  }
+
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeFilter = chip.dataset.filter;
+      filterTools();
+    });
+  });
+
+  search.addEventListener('input', filterTools);
+
+
+  /* =====================
+     TOOL CARD INTERACTION
+  ====================== */
+  document.querySelectorAll('.learn-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const url = btn.dataset.url;
+      if (url) window.open(url, '_blank');
+    });
+  });
+
+  document.querySelectorAll('.tool-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const more = card.querySelector('.more');
+      if (!more) return;
+      more.style.display =
+        more.style.display === 'block' ? 'none' : 'block';
+    });
+  });
+
+});
+</script>
+
 </head>
 <body>
 <header class="site-header">
   <div class="header-inner">
     <h1 class="logo">My Portfolio</h1>
 
-    <nav class="floating-nav">
-      <button data-target="home" class="active">
-        <i class="fas fa-home"></i>
-      </button>
-      <button data-target="about">
-        <i class="fas fa-user"></i>
-      </button>
-      <button data-target="portfolio">
-        <i class="fas fa-briefcase"></i>
-      </button>
-      <button data-target="tools">
-        <i class="fas fa-tools"></i>
-      </button>
-      <button data-target="contact">
-        <i class="fas fa-phone-alt"></i>
-      </button>
-    </nav>
+    <nav class="nav">
+  <button class="nav-btn" data-target="home">
+    <i class="fas fa-home"></i> Home
+  </button>
+  <button class="nav-btn" data-target="about">
+    <i class="fas fa-user"></i> About
+  </button>
+  <button class="nav-btn" data-target="portfolio">
+    <i class="fas fa-briefcase"></i> Portfolio
+  </button>
+  <button class="nav-btn" data-target="tools">
+    <i class="fas fa-tools"></i> Tools
+  </button>
+  <button class="nav-btn" data-target="contact">
+    <i class="fas fa-phone-alt"></i> Contact
+  </button>
+</nav>
 
   </div>
 </header>
