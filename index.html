@@ -167,8 +167,16 @@
         .contact-social-media a:hover { color: var(--pink-strong); transform: translateX(10px); }
         .contact-social-media i { margin-right: 8px; }
 
-        .column video { margin-top: 8px; vertical-align: middle; width: 100%; transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; }
-        .column video:hover { transform: scale(1.1); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); }
+        .column video { 
+          margin-top: 8px; 
+          vertical-align: middle; width: 100%; 
+          transition: transform 0.3s ease-in-out, 
+          box-shadow 0.3s ease-in-out; 
+        }
+        .column video:hover { 
+          transform: scale(1.1); 
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+        }
 
         section {
           padding: 12px 0;
@@ -382,7 +390,7 @@
   }
 }
 
-      .video-row {
+.video-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
@@ -406,7 +414,7 @@
     max-height: none;
   }
 }
-      .video-grid {
+  .video-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 16px;
@@ -417,6 +425,11 @@
     object-fit: cover;
     border-radius: 12px;
     background: #000;
+}
+      
+.video-grid video, .video-row video {
+  object-fit: contain;
+  background: #000;
 }
       .site-header {
   background: #fff;
