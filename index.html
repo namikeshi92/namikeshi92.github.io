@@ -568,6 +568,22 @@
 }
     </style>
     <script>
+      function scrollToCard(cardId) {
+      const card = document.getElementById(cardId);
+      if (!card) return;
+    
+      const yOffset = -90; // biar ga ketutup header sticky
+      const y =
+        card.getBoundingClientRect().top +
+        window.pageYOffset +
+        yOffset;
+    
+      window.scrollTo({
+        top: y,
+        behavior: 'smooth'
+      });
+    }
+
 document.addEventListener('DOMContentLoaded', () => {
 
   /* =====================
